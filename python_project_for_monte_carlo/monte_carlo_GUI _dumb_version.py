@@ -41,18 +41,6 @@ class UI(QtWidgets.QMainWindow):
         # set tool tips for widget
         self.number_of_monte_carlo_runs_line_edit.setToolTip("Set Number Of Runs")
         
-       #############################################
-
-        # VB = QtWidgets.QHBoxLayout(())
-        # VB.addWidget(QtWidgets.QCheckBox('check_box'))
-        # VB.addWidget(QtWidgets.QComboBox('combo_box'))
-        # VB.addWidget(QtWidgets.QLineEdit('nominal_line_edit'))
-        # VB.addWidget(QtWidgets.QLineEdit('variance_line_edit'))
-
-
-
-       ##############################################
-
         ## desired variables
 
         line_edit_nom_var = []
@@ -94,33 +82,61 @@ class UI(QtWidgets.QMainWindow):
             line_edit_nom_var[rows][0].setToolTip("Set a Nominal Value For Chosen Variable")            
             line_edit_nom_var[rows][1].setToolTip("Set A Variance for the Desired Variable")
             
-        # for rows in range(len(check_box_var)):
-            # checkBox_var = check_box_var[rows][0]
-            # distribution_combo_box = combo_box_distribution[rows][0]
-            # nominal_value_line_edit = line_edit_nom_var[rows][0]
-            # variance_line_edit = line_edit_nom_var[rows][1]
+        # check box function - 1
+        self.checkBox_var.stateChanged.connect(lambda: self.click_box_variance(self.checkBox_var, 
+        self.nominal_value_line_edit, self.distribution_combo_box))
 
-            # check box for desired variables            
-            # check_box_var[rows][0].stateChanged.connect(lambda r = rows: self.click_box_variance(check_box_var[r][0], 
-            # line_edit_nom_var[r][0], combo_box_distribution[r][0])) 
-            # # combo box for desired distribution
-            # combo_box_distribution[rows][0].currentIndexChanged.connect(lambda r = rows: self.combo_box_variance(combo_box_distribution[r][0], 
-            # line_edit_nom_var[r][1]))
+        # combobox function - 1
+        self.distribution_combo_box.currentIndexChanged.connect(lambda: self.combo_box_variance(self.distribution_combo_box, 
+        self.variance_line_edit))
 
-        r = 6
-        check_box_var[r][0].stateChanged.connect(lambda: self.click_box_variance(check_box_var[r][0], 
-            line_edit_nom_var[r][0], combo_box_distribution[r][0]))  
-        combo_box_distribution[r][0].currentIndexChanged.connect(lambda: self.combo_box_variance(combo_box_distribution[r][0], 
-            line_edit_nom_var[r][1]))
+        # check box function - 2
+        self.checkBox_var_2.stateChanged.connect(lambda: self.click_box_variance(self.checkBox_var_2, 
+        self.nominal_value_line_edit_2, self.distribution_combo_box_2))
 
-        # self.nominal_value_line_edit.setEnabled(False)
-        # self.variance_line_edit.setEnabled(False)
-
+        # combobox function - 2
+        self.distribution_combo_box_2.currentIndexChanged.connect(lambda: self.combo_box_variance(self.distribution_combo_box_2, 
+        self.variance_line_edit_2))
         
-        # self.checkBox_var.stateChanged.connect(lambda: self.click_box_variance(self.checkBox_var, self.nominal_value_line_edit, self.distribution_combo_box))
-        # self.distribution_combo_box.currentIndexChanged.connect(lambda: self.combo_box_variance(self.distribution_combo_box, self.variance_line_edit))
-        
-        
+        # check box function - 3
+        self.checkBox_var_3.stateChanged.connect(lambda: self.click_box_variance(self.checkBox_var_3, 
+        self.nominal_value_line_edit_3, self.distribution_combo_box_3))
+
+        # combobox function - 3
+        self.distribution_combo_box_3.currentIndexChanged.connect(lambda: self.combo_box_variance(self.distribution_combo_box_3, 
+        self.variance_line_edit_3))
+
+        # check box function - 4
+        self.checkBox_var_4.stateChanged.connect(lambda: self.click_box_variance(self.checkBox_var_4, 
+        self.nominal_value_line_edit_4, self.distribution_combo_box_4))
+
+        # combobox function - 4
+        self.distribution_combo_box_4.currentIndexChanged.connect(lambda: self.combo_box_variance(self.distribution_combo_box_4, 
+        self.variance_line_edit_4))
+
+        # check box function - 5
+        self.checkBox_var_5.stateChanged.connect(lambda: self.click_box_variance(self.checkBox_var_5, 
+        self.nominal_value_line_edit_5, self.distribution_combo_box_5))
+
+        # combobox function - 5
+        self.distribution_combo_box_5.currentIndexChanged.connect(lambda: self.combo_box_variance(self.distribution_combo_box_5, 
+        self.variance_line_edit_5))
+
+        # check box function - 6
+        self.checkBox_var_6.stateChanged.connect(lambda: self.click_box_variance(self.checkBox_var_6, 
+        self.nominal_value_line_edit_6, self.distribution_combo_box_6))
+
+        # combobox function - 6
+        self.distribution_combo_box_6.currentIndexChanged.connect(lambda: self.combo_box_variance(self.distribution_combo_box_6, 
+        self.variance_line_edit_6))
+
+        # check box function - 7
+        self.checkBox_var_7.stateChanged.connect(lambda: self.click_box_variance(self.checkBox_var_7, 
+        self.nominal_value_line_edit_7, self.distribution_combo_box_7))
+
+        # combobox function - 7
+        self.distribution_combo_box_7.currentIndexChanged.connect(lambda: self.combo_box_variance(self.distribution_combo_box_7, 
+        self.variance_line_edit_7))
 
         ## desired tests
 
@@ -133,7 +149,7 @@ class UI(QtWidgets.QMainWindow):
             widgets = self.desired_tests_layout.itemAt(i)
             
             if isinstance(widgets, QtWidgets.QVBoxLayout):
-                
+                 
                 for k in range(widgets.count()):
                     widget = widgets.itemAt(k).widget() 
                     if isinstance(widget, QtWidgets.QCheckBox):
@@ -154,41 +170,124 @@ class UI(QtWidgets.QMainWindow):
             check_box_test[rows][0].setToolTip("Mark the Desired Test")
             label_test[rows][0].setToolTip("The Desired Test")
 
-        for rows in range(len(check_box_test)):
-            check_box_test[rows][0].stateChanged.connect(lambda r = rows, r1 = rows: self.click_box_test(check_box_test[r][0],
-             label_test[r1][0]))    
-
+         
+        # check box 1
         self.test_checkBox.stateChanged.connect(lambda: self.click_box_test(self.test_checkBox, self.test_label))
-        self.checkBox_var.setToolTip("Choose Desired Test")
-        self.test_label.setText("")
-        # set tool tips for widgets
-        self.test_checkBox.setToolTip("Choose Desired Test")
+        
+        # check box 2
+        self.test_checkBox_2.stateChanged.connect(lambda: self.click_box_test(self.test_checkBox_2,self.test_label_2))
+        
+        # check box 3
+        self.test_checkBox_3.stateChanged.connect(lambda: self.click_box_test(self.test_checkBox_3, self.test_label_3))
+        
+        # check box 4
+        self.test_checkBox_4.stateChanged.connect(lambda: self.click_box_test(self.test_checkBox_4, self.test_label_4))
+        
+        # check box 5
+        self.test_checkBox_5.stateChanged.connect(lambda: self.click_box_test(self.test_checkBox_5, self.test_label_5))
+        
 
         ## define succesful run
-        # check box for succesful criteria
         self.bigger_than_line_edit.setEnabled(False)
         self.smaller_than_line_edit.setEnabled(False)
+
+        self.bigger_than_line_edit_2.setEnabled(False)
+        self.smaller_than_line_edit_2.setEnabled(False)
+
+        self.bigger_than_line_edit_3.setEnabled(False)
+        self.smaller_than_line_edit_3.setEnabled(False)
+
+        self.bigger_than_line_edit_4.setEnabled(False)
+        self.smaller_than_line_edit_4.setEnabled(False)
+
+        # check box for succesful criteria - 1
         self.succesful_var_check_box.stateChanged.connect(lambda: self.click_box_succesful_var(self.succesful_var_check_box, self.bigger_than_combo_box, 
             self.smaller_than_combo_box, self.bigger_than_line_edit, self.smaller_than_line_edit, self.succesful_value_label, 
             self.bigger_than_label,self.smaller_than_label))
 
-        # combo box for desired succes criteria
+        # combo box for desired succes criteria - 1
         self.bigger_than_combo_box.currentIndexChanged.connect(lambda: self.bigger_than_combo_box_change(self.bigger_than_combo_box, 
             self.bigger_than_line_edit, self.bigger_than_label))
 
         self.smaller_than_combo_box.currentIndexChanged.connect(lambda: self.smaller_than_combo_box_change(self.smaller_than_combo_box, 
             self.smaller_than_line_edit, self.smaller_than_label))
 
-        # line edit for succes criteria value
+        # line edit for succes criteria value - 1
         self.bigger_than_line_edit.returnPressed.connect(lambda: self.bigger_than_line_edit_change(self.bigger_than_combo_box, 
             self.bigger_than_line_edit, self.bigger_than_label))
 
         self.smaller_than_line_edit.returnPressed.connect(lambda: self.smaller_than_line_edit_change(self.smaller_than_combo_box, 
             self.smaller_than_line_edit, self.smaller_than_label))
 
+        # check box for succesful criteria - 2
+        self.succesful_var_check_box_2.stateChanged.connect(lambda: self.click_box_succesful_var(self.succesful_var_check_box_2, self.bigger_than_combo_box_2, 
+            self.smaller_than_combo_box_2, self.bigger_than_line_edit_2, self.smaller_than_line_edit_2, self.succesful_value_label_2, 
+            self.bigger_than_label_2,self.smaller_than_label_2))
+
+        # combo box for desired succes criteria - 2
+        self.bigger_than_combo_box_2.currentIndexChanged.connect(lambda: self.bigger_than_combo_box_change(self.bigger_than_combo_box_2, 
+            self.bigger_than_line_edit_2, self.bigger_than_label_2))
+
+        self.smaller_than_combo_box_2.currentIndexChanged.connect(lambda: self.smaller_than_combo_box_change(self.smaller_than_combo_box_2, 
+            self.smaller_than_line_edit_2, self.smaller_than_label_2))
+
+        # line edit for succes criteria value - 2
+        self.bigger_than_line_edit_2.returnPressed.connect(lambda: self.bigger_than_line_edit_change(self.bigger_than_combo_box_2, 
+            self.bigger_than_line_edit_2, self.bigger_than_label_2))
+
+        self.smaller_than_line_edit_2.returnPressed.connect(lambda: self.smaller_than_line_edit_change(self.smaller_than_combo_box_2, 
+            self.smaller_than_line_edit_2, self.smaller_than_label_2))
+
+            # check box for succesful criteria - 3
+        self.succesful_var_check_box_3.stateChanged.connect(lambda: self.click_box_succesful_var(self.succesful_var_check_box_3, self.bigger_than_combo_box_3, 
+            self.smaller_than_combo_box_3, self.bigger_than_line_edit_3, self.smaller_than_line_edit_3, self.succesful_value_label_3, 
+            self.bigger_than_label_3,self.smaller_than_label_3))
+
+        # combo box for desired succes criteria - 3
+        self.bigger_than_combo_box_3.currentIndexChanged.connect(lambda: self.bigger_than_combo_box_change(self.bigger_than_combo_box_3, 
+            self.bigger_than_line_edit_3, self.bigger_than_label_3))
+
+        self.smaller_than_combo_box_3.currentIndexChanged.connect(lambda: self.smaller_than_combo_box_change(self.smaller_than_combo_box_3, 
+            self.smaller_than_line_edit_3, self.smaller_than_label_3))
+
+        # line edit for succes criteria value - 3
+        self.bigger_than_line_edit_3.returnPressed.connect(lambda: self.bigger_than_line_edit_change(self.bigger_than_combo_box_3, 
+            self.bigger_than_line_edit_3, self.bigger_than_label_3))
+
+        self.smaller_than_line_edit_3.returnPressed.connect(lambda: self.smaller_than_line_edit_change(self.smaller_than_combo_box_3, 
+            self.smaller_than_line_edit_3, self.smaller_than_label_3))
+
+            # check box for succesful criteria - 4
+        self.succesful_var_check_box_4.stateChanged.connect(lambda: self.click_box_succesful_var(self.succesful_var_check_box_4, self.bigger_than_combo_box_4, 
+            self.smaller_than_combo_box_4, self.bigger_than_line_edit_4, self.smaller_than_line_edit_4, self.succesful_value_label_4, 
+            self.bigger_than_label_4,self.smaller_than_label_4))
+
+        # combo box for desired succes criteria - 4
+        self.bigger_than_combo_box_4.currentIndexChanged.connect(lambda: self.bigger_than_combo_box_change(self.bigger_than_combo_box_4, 
+            self.bigger_than_line_edit_4, self.bigger_than_label_4))
+
+        self.smaller_than_combo_box_4.currentIndexChanged.connect(lambda: self.smaller_than_combo_box_change(self.smaller_than_combo_box_4, 
+            self.smaller_than_line_edit_4, self.smaller_than_label_4))
+
+        # line edit for succes criteria value - 4
+        self.bigger_than_line_edit_4.returnPressed.connect(lambda: self.bigger_than_line_edit_change(self.bigger_than_combo_box_4, 
+            self.bigger_than_line_edit_4, self.bigger_than_label_4))
+
+        self.smaller_than_line_edit_4.returnPressed.connect(lambda: self.smaller_than_line_edit_change(self.smaller_than_combo_box_4, 
+            self.smaller_than_line_edit_4, self.smaller_than_label_4))
+
         # set tool tips for widget
         self.bigger_than_line_edit.setToolTip("Enter a Minimum Value for the Desired Succes Criteria")
         self.smaller_than_line_edit.setToolTip("Enter a Maximum Value for the Desired Succes Criteria")
+
+        self.bigger_than_line_edit_2.setToolTip("Enter a Minimum Value for the Desired Succes Criteria")
+        self.smaller_than_line_edit_2.setToolTip("Enter a Maximum Value for the Desired Succes Criteria")
+
+        self.bigger_than_line_edit_3.setToolTip("Enter a Minimum Value for the Desired Succes Criteria")
+        self.smaller_than_line_edit_3.setToolTip("Enter a Maximum Value for the Desired Succes Criteria")
+
+        self.bigger_than_line_edit_4.setToolTip("Enter a Minimum Value for the Desired Succes Criteria")
+        self.smaller_than_line_edit_4.setToolTip("Enter a Maximum Value for the Desired Succes Criteria")
 
 
         ## where to save the data
